@@ -61,7 +61,7 @@ app.put("/api/student/:id", (req, res) => {
         const newDivison = req.body.division;
         student[i].division = newDivison;
       }
-      res.end();
+      res.end();return;
     }
     
   }
