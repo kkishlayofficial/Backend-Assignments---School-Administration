@@ -47,24 +47,21 @@ app.put("/api/student/:id", (req, res) => {
       if (req.body.name) {
         const newName = req.body.name;
         student[i].name = newName;
-        res.end();
+        res.send({"name":newName});
         return;
-      }
-      else if (req.body.currentClass) {
-          if(!isNaN(req.body.currentClass)){
-        const newClass = req.body.currentClass;
-        student[i].currentClass = Number(newClass);
-        res.end();
-        return;
-      }
-    }
-      else if (req.body.division) {
+      } else if (req.body.currentClass) {
+        if (!isNaN(req.body.currentClass)) {
+          const newClass = req.body.currentClass;
+          student[i].currentClass = Number(newClass);
+          res.send({"currentClass":newClass});
+          return;
+        }
+      } else if (req.body.division) {
         const newDivison = req.body.division;
         student[i].division = newDivison;
-        res.end();
+        res.send({"division":newDivison});
         return;
       }
-      
     }
   }
   res.sendStatus(400);
@@ -73,7 +70,7 @@ app.delete("/api/student/:id", (req, res) => {
   const id = req.params.id;
   for (let i = 0; i < student.length; i++) {
     if (student[i].id == id) {
-      student.splice(i,1);
+      student.splice(i, 1);
       res.end();
       return;
     }
