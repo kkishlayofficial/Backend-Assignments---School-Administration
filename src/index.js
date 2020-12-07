@@ -47,22 +47,23 @@ app.put("/api/student/:id", (req, res) => {
       if (req.body.name) {
         const newName = req.body.name;
         student[i].name = newName;
-        res.send({"name":newName});
-        return;
-      } else if (req.body.currentClass) {
+      }
+      if (req.body.currentClass) {
         if (!isNaN(req.body.currentClass)) {
           const newClass = req.body.currentClass;
           student[i].currentClass = Number(newClass);
-          res.send({"currentClass":newClass});
-          return;
         }
-      } else if (req.body.division) {
+        else{
+            res.sendStatus(400);return;
+        }
+      }
+      if (req.body.division) {
         const newDivison = req.body.division;
         student[i].division = newDivison;
-        res.send({"division":newDivison});
-        return;
       }
+      res.end();
     }
+    
   }
   res.sendStatus(400);
 });
